@@ -42,7 +42,7 @@
       from { background-position: 0 center; }
       to { background-position: -1920px center; }
     }
-    /* Líneas animadas futuristas */
+    /* Líneas animadas futuristas con fondo tamaño definido para un loop infinito */
     .futuristic-lines {
       position: fixed;
       top: 0;
@@ -52,7 +52,7 @@
       pointer-events: none;
       background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(204,255,0,0.2) 10px, rgba(204,255,0,0.2) 20px);
       opacity: 0.2;
-      /* Animamos de 0 a 20px (el tamaño del patrón) para que sea infinito sin saltos */
+      background-size: 20px 20px; /* Define el tamaño del patrón */
       animation: moveLines 20s linear infinite;
       z-index: -1;
     }
@@ -381,6 +381,7 @@
       justify-content: center;
       gap: 15px;
     }
+    /* Se integran las 4 imágenes nuevas en Elite Project */
     #elite-project .project-gallery img {
       width: 300px;
       border-radius: 10px;
@@ -620,14 +621,14 @@
   <div class="futuristic-lines"></div>
   <!-- Intro Overlay -->
   <div id="intro-overlay">
-    <img class="intro-logo" src="C:\Users\Personal\Downloads\ELITE.png" alt="Logo Elite">
+    <img class="intro-logo" src="images/ELITE.png" alt="Logo Elite">
     <div class="intro-tagline">La Carlota - Caracas</div>
   </div>
   
   <!-- Header -->
   <header>
     <div class="header-logo">
-      <img src="C:\Users\Personal\Downloads\ELITE.png" alt="Logo Elite">
+      <img src="images/ELITE.png" alt="Logo Elite">
     </div>
     <nav>
       <ul>
@@ -648,9 +649,9 @@
   <!-- Hero Section con Slider -->
   <section class="hero" id="hero">
     <div class="slider">
-      <div class="slide active" style="background-image: url('C:\Users\Personal\Desktop\photo-1709587825135-80b00570c355.jpg');"></div>
-      <div class="slide" style="background-image: url('C:\Users\Personal\Desktop\premium_photo-1708692919998-e3dc853ef8a8.jpg');"></div>
-      <div class="slide" style="background-image: url('C:\Users\Personal\Desktop\360_F_446645032_0jjxERZv8ITQVTNgfT2bJaC2k7ITIn1a.jpg');"></div>
+      <div class="slide active" style="background-image: url('images/photo-1709587825135-80b00570c355.jpg');"></div>
+      <div class="slide" style="background-image: url('images/premium_photo-1708692919998-e3dc853ef8a8.jpg');"></div>
+      <div class="slide" style="background-image: url('images/360_F_446645032_0jjxERZv8ITQVTNgfT2bJaC2k7ITIn1a.jpg');"></div>
     </div>
     <div class="hero-content">
       <h1>Bienvenido a Elite Padel Club</h1>
@@ -673,7 +674,7 @@
             En Elite Padel Club combinamos tecnología de vanguardia con instalaciones de primer nivel para brindar una experiencia única. Cada detalle ha sido cuidadosamente diseñado para ofrecer confort, innovación y exclusividad, redefiniendo el concepto de pádel en Caracas.
           </span>
         </p>
-        <img src="C:\Users\Personal\Desktop\photo-1709587823347-4e178eda58cd.jpg" alt="Instalaciones Elite">
+        <img src="images/photo-1709587823347-4e178eda58cd.jpg" alt="Instalaciones Elite">
       </div>
       <div class="social-media">
         <a href="https://www.instagram.com/elitepadelclubvzla/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -755,10 +756,10 @@
             Descubre nuestro ambicioso proyecto: un complejo deportivo de élite que ofrece instalaciones de alta tecnología, canchas innovadoras, un restaurante de primer nivel y hasta helipuerto para llegar volando a jugar. Nuestro diseño arquitectónico se integra armónicamente con el paisaje caraqueño y la imponente montaña del Ávila, redefiniendo el concepto de exclusividad y experiencia deportiva.
           </p>
           <div class="project-gallery">
-            <img src="https://via.placeholder.com/300?text=Fachada+Principal" alt="Fachada Principal">
-            <img src="https://via.placeholder.com/300?text=Canchas+Innovadoras" alt="Canchas Innovadoras">
-            <img src="https://via.placeholder.com/300?text=Helipuerto" alt="Helipuerto">
-            <img src="https://via.placeholder.com/300?text=Restaurante+Elite" alt="Restaurante Elite">
+            <img src="images/photo_2025-02-22_02-06-24.jpg" alt="Imagen 1">
+            <img src="images/photo_2025-02-22_02-06-09.jpg" alt="Imagen 2">
+            <img src="images/photo_2025-02-22_02-06-13.jpg" alt="Imagen 3">
+            <img src="images/photo_2025-02-22_02-06-45.jpg" alt="Imagen 4">
           </div>
         </div>
       </div>
@@ -771,10 +772,10 @@
       <div class="scroll">
         <h2 class="section-title">Galería</h2>
         <div class="gallery">
-          <img src="C:\Users\Personal\Desktop\Pistas-de-padel-Manzasport-en-FranciaJPG.jpg" alt="Cancha 1">
-          <img src="C:\Users\Personal\Desktop\Pista-de-padel-Cantabria.jpg" alt="Cancha 2">
-          <img src="C:\Users\Personal\Desktop\photo-1709587825135-80b00570c355.jpg" alt="Cancha 3">
-          <img src="C:\Users\Personal\Desktop\istockphoto-1423558556-612x612.jpg" alt="Jugadores">
+          <img src="images/Pistas-de-padel-Manzasport-en-FranciaJPG.jpg" alt="Cancha 1">
+          <img src="images/Pista-de-padel-Cantabria.jpg" alt="Cancha 2">
+          <img src="images/photo-1709587825135-80b00570c355.jpg" alt="Cancha 3">
+          <img src="images/istockphoto-1423558556-612x612.jpg" alt="Jugadores">
         </div>
       </div>
     </div>
