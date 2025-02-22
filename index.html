@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Padel Club - Futurista 2025</title>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Fuente futurista Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== Reset y Base ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Fondo animado tecnológico */
+    .tech-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://via.placeholder.com/1920x1080/0f0f0f/ffffff?text=Tech+Background') repeat-x;
+      opacity: 0.05;
+      z-index: -2;
+      animation: pulse 10s infinite alternate, moveBg 60s linear infinite;
+    }
+    @keyframes pulse {
+      from { opacity: 0.05; }
+      to { opacity: 0.1; }
+    }
+    /* Se asume que el background es tileable; la animación mueve 1920px, igual al ancho del patrón */
+    @keyframes moveBg {
+      from { background-position: 0 center; }
+      to { background-position: -1920px center; }
+    }
+    /* Líneas animadas futuristas con fondo tamaño definido para un loop infinito */
+    .futuristic-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(204,255,0,0.2) 10px, rgba(204,255,0,0.2) 20px);
+      opacity: 0.2;
+      background-size: 20px 20px; /* Define el tamaño del patrón */
+      animation: moveLines 20s linear infinite;
+      z-index: -1;
+    }
+    @keyframes moveLines {
+      from { background-position: 0 0; }
+      to { background-position: 20px 0; }
+    }
+
+    /* Efecto de aparición en scroll: de difuminado a sólido */
+    .scroll {
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+    }
+    .scroll.visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    /* ========== Intro Overlay Futurista ========== */
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #121212;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      animation: fadeOutOverlay 2s ease-out forwards;
+      animation-delay: 2s;
+    }
+    #intro-overlay .intro-logo {
+      width: 300px;
+      opacity: 0;
+      animation: logoFadeIn 1.5s forwards;
+    }
+    #intro-overlay .intro-tagline {
+      margin-top: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2em;
+      color: #CCFF00;
+      opacity: 0;
+      animation: taglineFadeIn 1.5s forwards;
+      animation-delay: 0.5s;
+      content: "La Carlota - Caracas";
+    }
+    @keyframes logoFadeIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes taglineFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOutOverlay {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* ========== Header ========== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(18, 18, 18, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+    .header-logo img {
+      width: 50px;
+      height: auto;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+    nav ul li { margin: 0 10px; }
+    nav ul li a {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1em;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover { color: #CCFF00; }
+    .account-icon {
+      margin-left: 10px;
+      font-size: 1.5em;
+    }
+    .account-icon a {
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .account-icon a:hover {
+      color: #CCFF00;
+    }
+
+    /* Conservamos la clase btn-shine para botones */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-shine::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+      transform: skewX(-25deg);
+      transition: all 0.5s;
+    }
+    .btn-shine:hover::after { left: 100%; }
+    .btn-shine:hover { box-shadow: 0 0 10px rgba(204, 255, 0, 0.8); }
+
+    /* ========== Hero Section con Slider ========== */
+    .hero {
+      margin-top: 70px;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .slide.active { opacity: 1; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 20px;
+    }
+    .hero-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease forwards;
+    }
+    .hero-content p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    .hero-content .cta-btn {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: linear-gradient(45deg, #C0C0C0, #E0E0E0);
+      border: none;
+      color: #121212;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .hero-content .cta-btn:hover { background: #CCFF00; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== Secciones Comunes ========== */
+    section { padding: 60px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      color: #CCFF00;
+    }
+    .content { animation: fadeIn 1s ease forwards; }
+
+    /* ========== Sección Nosotros (Extendida) ========== */
+    #nosotros { background: #1e1e1e; }
+    #nosotros .info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+    #nosotros .info img {
+      width: 45%;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    #nosotros .info p {
+      width: 45%;
+      font-size: 1.1em;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+    #nosotros .info .descripcion-extendida {
+      font-size: 1em;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+    .social-media {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .social-media a {
+      margin: 0 10px;
+      font-size: 1.5em;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-media a:hover { color: #CCFF00; }
+
+    /* ========== Sección Horarios ========== */
+    #horarios ul {
+      list-style: none;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    #horarios ul li { margin: 10px 0; }
+
+    /* ========== Sección Foro Elite ========== */
+    #foro-elite .news-item {
+      background: #1e1e1e;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    #foro-elite .news-item:hover { transform: translateY(-5px); }
+    #foro-elite .news-item h3 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 10px;
+      color: #CCFF00;
+    }
+    #foro-elite .news-item a {
+      display: block;
+      color: inherit;
+    }
+
+    /* ========== Sección Planes (fondo gris estático, animar solo contenido interno) ========== */
+    #planes { background: #1e1e1e; }
+    .plans-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .plan {
+      background: #292929;
+      border: 2px solid #CCFF00;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px;
+      flex: 1;
+      min-width: 280px;
+      transition: transform 0.3s ease;
+    }
+    .plan:hover { transform: scale(1.05); }
+    .plan h3 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 10px;
+      color: #CCFF00;
+    }
+    .plan ul { list-style: none; margin: 10px 0; }
+    .plan ul li { margin: 8px 0; }
+    .plan .reserve-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background: #CCFF00;
+      color: #121212;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: bold;
+      width: fit-content;
+      transition: background 0.3s ease;
+    }
+    .plan .reserve-btn:hover { background: #E0E000; }
+
+    /* ========== Sección Elite Project (fondo gris estático, animar solo contenido interno) ========== */
+    #elite-project { background: #1e1e1e; padding: 60px 20px; }
+    #elite-project .project-content {
+      text-align: center;
+    }
+    #elite-project .project-content h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      color: #CCFF00;
+      margin-bottom: 20px;
+    }
+    #elite-project .project-content p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    #elite-project .project-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    /* Se integran las 4 imágenes nuevas en Elite Project */
+    #elite-project .project-gallery img {
+      width: 300px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    #elite-project .project-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ========== Sección Galería (fondo gris estático, animar solo contenido interno) ========== */
+    #galeria { background: #1e1e1e; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+
+    /* ========== Sección Contacto ========== */
+    #contacto form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    #contacto form input,
+    #contacto form textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #292929;
+      color: #fff;
+    }
+    #contacto form button {
+      padding: 15px;
+      background: #CCFF00;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    #contacto form button:hover { background: #E0E000; }
+
+    /* ========== Sección Cuenta (Login / Signup) ========== */
+    #account { background: #1e1e1e; padding: 60px 20px; }
+    #account h2 {
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      color: #CCFF00;
+      margin-bottom: 40px;
+    }
+    #account .login-form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #292929;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    #account .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #1e1e1e;
+      color: #fff;
+    }
+    #account .login-form button {
+      width: 100%;
+      padding: 15px;
+      background: #CCFF00;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    #account .login-form button:hover { background: #E0E000; }
+    #account .login-options {
+      text-align: center;
+      margin-top: 10px;
+    }
+    #account .login-options a {
+      color: #fff;
+      font-size: 0.9em;
+      transition: color 0.3s ease;
+    }
+    #account .login-options a:hover {
+      color: #CCFF00;
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      background: #121212;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      border-top: 1px solid #333;
+    }
+
+    /* ========== Botón y Ventana de Soporte Técnico ========== */
+    .support-chat-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #CCFF00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(204, 255, 0, 0.8);
+      z-index: 1500;
+    }
+    .support-chat-btn i {
+      color: #121212;
+      font-size: 1.5em;
+    }
+    .support-chat-window {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: #1e1e1e;
+      border: 2px solid #CCFF00;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      z-index: 1500;
+    }
+    .support-chat-window header {
+      background: #292929;
+      padding: 10px;
+      border-bottom: 1px solid #CCFF00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .support-chat-window header h4 {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1em;
+      color: #CCFF00;
+    }
+    .support-chat-window header .close-chat {
+      cursor: pointer;
+      color: #CCFF00;
+      font-size: 1.2em;
+    }
+    .support-chat-window .chat-body {
+      padding: 10px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 0.9em;
+      color: #fff;
+    }
+    .support-chat-window .chat-footer {
+      padding: 10px;
+      border-top: 1px solid #CCFF00;
+      display: flex;
+    }
+    .support-chat-window .chat-footer input {
+      flex: 1;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #292929;
+      color: #fff;
+    }
+    .support-chat-window .chat-footer button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      background: #CCFF00;
+      border: none;
+      border-radius: 5px;
+      color: #121212;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .support-chat-window .chat-footer button:hover {
+      background: #E0E000;
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      header { flex-direction: column; }
+      nav ul { flex-direction: column; }
+      nav ul li { margin: 10px 0; }
+      #nosotros .info {
+        flex-direction: column;
+      }
+      #nosotros .info img,
+      #nosotros .info p { width: 100%; }
+      .plans-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      #elite-project .project-gallery img {
+        width: 90%;
+        max-width: 300px;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      /* Ajuste para el botón de soporte en móviles */
+      .support-chat-btn {
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2em;
+      }
+      .hero-content p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="tech-bg"></div>
+  <div class="futuristic-lines"></div>
+  <!-- Intro Overlay -->
+  <div id="intro-overlay">
+    <img class="intro-logo" src="images/ELITE.png" alt="Logo Elite">
+    <div class="intro-tagline">La Carlota - Caracas</div>
+  </div>
+  
+  <!-- Header -->
+  <header>
+    <div class="header-logo">
+      <img src="images/ELITE.png" alt="Logo Elite">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="foro.html" target="_blank">Foro Elite</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#elite-project">The Elite Project</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="account-icon">
+      <a href="#account"><i class="fas fa-user"></i></a>
+    </div>
+  </header>
+  
+  <!-- Hero Section con Slider -->
+  <section class="hero" id="hero">
+    <div class="slider">
+      <div class="slide active" style="background-image: url('images/photo-1709587825135-80b00570c355.jpg');"></div>
+      <div class="slide" style="background-image: url('images/premium_photo-1708692919998-e3dc853ef8a8.jpg');"></div>
+      <div class="slide" style="background-image: url('images/360_F_446645032_0jjxERZv8ITQVTNgfT2bJaC2k7ITIn1a.jpg');"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Bienvenido a Elite Padel Club</h1>
+      <p>Donde la innovación y el deporte se unen para brindarte una experiencia única.</p>
+      <button class="cta-btn btn-shine" onclick="document.getElementById('planes').scrollIntoView({behavior:'smooth'});">
+        Descubre Nuestros Planes
+      </button>
+    </div>
+  </section>
+  
+  <!-- Sección Nosotros -->
+  <section id="nosotros" class="scroll">
+    <div class="container">
+      <h2 class="section-title">Nosotros</h2>
+      <div class="info">
+        <p>
+          Padel Elite nació como una iniciativa para crear el mejor espacio de pádel en Caracas. Nuestros fundadores apostaron por el deporte del país y construyeron un lugar donde tanto novatos como profesionales pueden aprender y alcanzar su máximo rendimiento. Ofrecemos un ambiente seguro, premium y con una visión futurista y tecnológica nunca antes vista.
+          <br>
+          <span class="descripcion-extendida">
+            En Elite Padel Club combinamos tecnología de vanguardia con instalaciones de primer nivel para brindar una experiencia única. Cada detalle ha sido cuidadosamente diseñado para ofrecer confort, innovación y exclusividad, redefiniendo el concepto de pádel en Caracas.
+          </span>
+        </p>
+        <img src="images/photo-1709587823347-4e178eda58cd.jpg" alt="Instalaciones Elite">
+      </div>
+      <div class="social-media">
+        <a href="https://www.instagram.com/elitepadelclubvzla/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/TU_LINK_TWITTER_AQUI" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="TU_LINK_TELEGRAM_AQUI" target="_blank"><i class="fab fa-telegram"></i></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Horarios -->
+  <section id="horarios" class="scroll">
+    <div class="container">
+      <h2 class="section-title">Horarios</h2>
+      <ul>
+        <li>Lunes a Viernes: 10:00 - 22:00</li>
+        <li>Sábado: 9:00 - 20:00</li>
+        <li>Domingo: 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Sección Foro Elite -->
+  <section id="foro-elite" class="scroll">
+    <div class="container">
+      <h2 class="section-title">Foro Elite</h2>
+      <div class="news-item">
+        <a href="foro.html" target="_blank">
+          <h3>Torneo de Verano 2025</h3>
+          <p>Haz clic para ver detalles del torneo y comentarios de la comunidad.</p>
+        </a>
+      </div>
+      <div class="news-item">
+        <a href="foro.html" target="_blank">
+          <h3>Inauguración de Nuevas Pistas</h3>
+          <p>Haz clic para ver detalles y conocer las experiencias de los usuarios.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Planes (fondo gris estático, animar solo contenido interno) -->
+  <section id="planes">
+    <div class="container">
+      <div class="scroll">
+        <h2 class="section-title">Planes</h2>
+        <div class="plans-container">
+          <div class="plan">
+            <h3>Plan Pro</h3>
+            <ul>
+              <li>Reservas inteligentes con IA</li>
+              <li>Acceso a canchas de primer nivel</li>
+              <li>Chatbot de soporte técnico vía Telegram</li>
+              <li>Pago integrado en la app</li>
+            </ul>
+            <a href="reservas.html?plan=pro" target="_blank" class="reserve-btn btn-shine">Haz tu reserva</a>
+          </div>
+          <div class="plan">
+            <h3>Plan Elite</h3>
+            <ul>
+              <li>Todas las ventajas del Plan Pro</li>
+              <li>Mini app de IA en Telegram para pagos</li>
+              <li>Pasarela de pagos integrada con Wallet Elite</li>
+              <li>Acceso prioritario a instalaciones y futuros servicios</li>
+            </ul>
+            <a href="reservas.html?plan=elite" target="_blank" class="reserve-btn btn-shine">Haz tu reserva</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Elite Project (fondo gris estático, animar solo contenido interno) -->
+  <section id="elite-project">
+    <div class="container">
+      <div class="scroll">
+        <div class="project-content">
+          <h2>The Elite Project</h2>
+          <p>
+            Descubre nuestro ambicioso proyecto: un complejo deportivo de élite que ofrece instalaciones de alta tecnología, canchas innovadoras, un restaurante de primer nivel y hasta helipuerto para llegar volando a jugar. Nuestro diseño arquitectónico se integra armónicamente con el paisaje caraqueño y la imponente montaña del Ávila, redefiniendo el concepto de exclusividad y experiencia deportiva.
+          </p>
+          <div class="project-gallery">
+            <img src="images/photo_2025-02-22_02-06-24.jpg" alt="Imagen 1">
+            <img src="images/photo_2025-02-22_02-06-09.jpg" alt="Imagen 2">
+            <img src="images/photo_2025-02-22_02-06-13.jpg" alt="Imagen 3">
+            <img src="images/photo_2025-02-22_02-06-45.jpg" alt="Imagen 4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Galería (fondo gris estático, animar solo contenido interno) -->
+  <section id="galeria">
+    <div class="container">
+      <div class="scroll">
+        <h2 class="section-title">Galería</h2>
+        <div class="gallery">
+          <img src="images/Pistas-de-padel-Manzasport-en-FranciaJPG.jpg" alt="Cancha 1">
+          <img src="images/Pista-de-padel-Cantabria.jpg" alt="Cancha 2">
+          <img src="images/photo-1709587825135-80b00570c355.jpg" alt="Cancha 3">
+          <img src="images/istockphoto-1423558556-612x612.jpg" alt="Jugadores">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Contacto -->
+  <section id="contacto" class="scroll">
+    <div class="container">
+      <h2 class="section-title">Contacto</h2>
+      <form id="contactForm">
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" id="email" name="email" placeholder="Tu email" required>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Tu mensaje" required></textarea>
+        <button type="submit" class="btn-shine">Enviar Mensaje</button>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Sección Cuenta (Login / Signup) -->
+  <section id="account" class="scroll">
+    <div class="container">
+      <h2 class="section-title">Inicia Sesión / Crea Tu Cuenta</h2>
+      <div class="login-form">
+        <input type="email" placeholder="Tu email">
+        <input type="password" placeholder="Tu contraseña">
+        <button class="btn-shine">Ingresar</button>
+        <div class="login-options">
+          <p>O inicia sesión con:</p>
+          <a href="#">Google</a>
+        </div>
+        <div class="login-options">
+          <p>¿No tienes cuenta? <a href="#">Crea una aquí</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Elite Padel Club. Todos los derechos reservados.</p>
+  </footer>
+  
+  <!-- Botón de Soporte Técnico -->
+  <div class="support-chat-btn" onclick="toggleChat()">
+    <i class="fas fa-headset"></i>
+  </div>
+  <!-- Ventana de Chat de Soporte Técnico -->
+  <div class="support-chat-window" id="supportChat">
+    <header>
+      <h4>Soporte Técnico</h4>
+      <span class="close-chat" onclick="toggleChat()">&times;</span>
+    </header>
+    <div class="chat-body">
+      <p>Bienvenido al soporte técnico. ¿En qué podemos ayudarte?</p>
+    </div>
+    <div class="chat-footer">
+      <input type="text" placeholder="Escribe tu mensaje...">
+      <button>Enviar</button>
+    </div>
+  </div>
+  
+  <script>
+    /* ========= Funcionalidad del Slider ========= */
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 5000);
+    
+    /* ========= Efecto Sonoro en Botones ========= */
+    const audio = new Audio('https://www.soundjay.com/button/sounds/button-30.mp3');
+    const buttons = document.querySelectorAll('.btn-shine');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        audio.currentTime = 0;
+        audio.play().catch(e => console.log("Reproducción de audio bloqueada."));
+      });
+    });
+    
+    /* ========= Remover la Intro Overlay ========= */
+    window.addEventListener('load', () => {
+      const intro = document.getElementById('intro-overlay');
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 4000);
+    });
+    
+    /* ========= Simulación de envío del Formulario de Contacto ========= */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por contactarnos. Pronto nos comunicaremos contigo.');
+      this.reset();
+    });
+    
+    /* ========= Funcionalidad del Chat de Soporte Técnico ========= */
+    function toggleChat() {
+      const chatWindow = document.getElementById('supportChat');
+      if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+        chatWindow.style.display = 'flex';
+      } else {
+        chatWindow.style.display = 'none';
+      }
+    }
+    
+    /* ========= Animación en Scroll ========= */
+    const scrollElements = document.querySelectorAll('.scroll');
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.1});
+    scrollElements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
