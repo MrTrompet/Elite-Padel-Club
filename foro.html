@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foro Elite - Elite Padel Club</title>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset y Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    a { text-decoration: none; color: inherit; }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      color: #CCFF00;
+    }
+    
+    /* Sección Informativa: Torneos, Clases y Equipos */
+    .info-section {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .info-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2em;
+      color: #CCFF00;
+      margin-bottom: 15px;
+    }
+    .info-section p {
+      margin-bottom: 15px;
+      font-size: 1em;
+    }
+    .info-section ul {
+      list-style: disc;
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .post-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .post {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .post .author {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      color: #CCFF00;
+      margin-bottom: 10px;
+    }
+    .post p {
+      margin-bottom: 10px;
+    }
+    
+    .comment-form {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #292929;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .comment-form input,
+    .comment-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #1e1e1e;
+      color: #fff;
+    }
+    .comment-form button {
+      padding: 15px;
+      background: #CCFF00;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+    .comment-form button:hover { background: #E0E000; }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2em; }
+      .post, .comment-form, .info-section { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Foro Elite</h1>
+  </header>
+  
+  <div class="info-section">
+    <h2>Torneos, Clases y Equipamientos</h2>
+    <p><strong>Elite Padel Club</strong> es tu club privado de pádel, ubicado en la Base Aérea Militar. Aquí disfrutarás de:</p>
+    <ul>
+      <li>Clases, torneos y eventos VIP para miembros.</li>
+      <li>Instalaciones exclusivas y superpanorámicas.</li>
+      <li>Equipamientos de alta calidad: raquetas, pelotas y más.</li>
+    </ul>
+    <p><strong>¿Sabías que la cancha de pádel tiene medidas específicas?</strong></p>
+    <ul>
+      <li>Dimensiones: 20m de largo x 10m de ancho.</li>
+      <li>Altura de la red: 0.88m en el centro y 0.92m en los extremos.</li>
+      <li>Paredes de cristal y mallas metálicas, con proyección a 8m en el futuro.</li>
+      <li>Las pelotas deben cumplir requisitos de tamaño, peso, rebote y presión.</li>
+    </ul>
+    <p>¡Te esperamos en Elite Padel Club, donde la exclusividad se une a la pasión por el pádel!</p>
+  </div>
+  
+  <div class="post-container">
+    <!-- Ejemplo de publicación -->
+    <div class="post">
+      <div class="author">Roberto Mazzeo:</div>
+      <p>"Gran juego hoy en @ElitePadel, practicando para el próximo torneo. ¡La experiencia es inigualable!"</p>
+    </div>
+    <div class="post">
+      <div class="author">María González:</div>
+      <p>"Las clases y torneos en Elite Padel Club son de otro nivel. ¡Altamente recomendado para quienes buscan exclusividad!"</p>
+    </div>
+  </div>
+  
+  <!-- Formulario para agregar comentario -->
+  <div class="comment-form">
+    <h2>Deja tu comentario</h2>
+    <input type="text" placeholder="Tu nombre" required>
+    <textarea placeholder="Tu comentario" rows="4" required></textarea>
+    <button>Enviar Comentario</button>
+  </div>
+  
+  <footer style="text-align: center; margin-top: 30px;">
+    <p>&copy; 2025 Elite Padel Club</p>
+  </footer>
+</body>
+</html>
